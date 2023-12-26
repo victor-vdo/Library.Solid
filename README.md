@@ -7,7 +7,6 @@
 
 ### O: Open/Closed Principle (OCP)
 <p align="justify"> Classes that inherit from Model can override the GenerateId method to implement custom Id generation strategies, keeping the Model class open for extension, without the need to directly modify the base class. Therefore, this model respects the Open/Closed Principle (OCP). </p>
-<p align="justify">In this case, subclasses that inherit from Model do not have concrete dependencies on low-level modules that directly violate DIP. The dependency is on the generation of the Id, but this is abstracted by calling the GenerateId() method in the Model base class.</p>
 
 ```c#
     public abstract class Model
@@ -32,3 +31,4 @@
 ### I: Interface Segregation Principle (ISP)
 
 ### D: Dependency Inversion Principle (DIP)
+<p align="justify">Subclasses that inherit from Model do not have concrete dependencies on low-level modules that directly violate DIP. The dependency is on the generation of the Id, but this is abstracted by calling the GenerateId() method in the Model base class.</p>
