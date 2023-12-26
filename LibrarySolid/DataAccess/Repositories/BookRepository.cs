@@ -18,17 +18,6 @@ namespace LibrarySolid.DataAccess.Repositories
             _context.SaveChanges();
         }
 
-        public void Delete(Guid id)
-        {
-            var book = _context.Books.FirstOrDefault(u => u.Id == id);
-
-            if (book != null)
-            {
-                _context.Books.Remove(book);
-                _context.SaveChanges();
-            }
-        }
-
         public Book GetById(Guid id)
         {
             var book = _context.Books.FirstOrDefault(u => u.Id == id);
@@ -39,6 +28,19 @@ namespace LibrarySolid.DataAccess.Repositories
         {
             _context.Books.Update(book);
             _context.SaveChanges();
+        }
+
+        public void Delete(Guid id)
+        {
+            var book = _context.Books.FirstOrDefault(u => u.Id == id);
+
+            if (book != null)
+            {
+                // Soft delete
+                book.Active = false;
+                _context.Books.Update(book);
+                _context.SaveChanges();
+            }
         }
     }
 }

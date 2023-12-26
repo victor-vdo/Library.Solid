@@ -25,7 +25,9 @@ namespace LibrarySolid.DataAccess.Repositories
 
             if (loan != null)
             {
-                _context.Loans.Remove(loan);
+                // Soft delete
+                loan.Active = false;
+                _context.Loans.Update(loan);
                 _context.SaveChanges();
             }
         }

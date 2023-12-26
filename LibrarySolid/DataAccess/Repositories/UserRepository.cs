@@ -36,7 +36,9 @@ namespace LibrarySolid.DataAccess.Repositories
 
             if(user != null)
             {
-                _context.Users.Remove(user);
+                // Soft delete
+                user.Active = false;
+                _context.Users.Update(user);
                 _context.SaveChanges();
             }
         }
