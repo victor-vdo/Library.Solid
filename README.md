@@ -48,5 +48,16 @@
       _context = context;
   }
 ```
+<p align="justify"> For this, it was necessary to create a new method, SaveChanges, which will be accessed by the repositories. </p>
+
+```c#
+  public class DataContext : DbContext, IDataContext
+    {
+        void IDataContext.SaveChanges()
+        {
+            base.SaveChanges();
+        }
+    ...
+```
 
 
