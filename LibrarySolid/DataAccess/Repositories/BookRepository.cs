@@ -24,13 +24,25 @@ namespace LibrarySolid.DataAccess.Repositories
             return book;
         }
 
+        public Book GetByAuthor(string author)
+        {
+            var book = _context.Books.FirstOrDefault(u => u.Author.ToLower().Equals(author.ToLower()));
+            return book;
+        }
+
+        public Book GetByTitle(string title)
+        {
+            var book = _context.Books.FirstOrDefault(u => u.Title.ToLower().Equals(title.ToLower()));
+            return book;
+        }
+
         public void Update(Book book)
         {
             _context.Books.Update(book);
             _context.SaveChanges();
         }
 
-        public void Delete(Guid id)
+        public void RemoveById(Guid id)
         {
             var book = _context.Books.FirstOrDefault(u => u.Id == id);
 
@@ -42,5 +54,6 @@ namespace LibrarySolid.DataAccess.Repositories
                 _context.SaveChanges();
             }
         }
+
     }
 }
