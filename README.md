@@ -52,12 +52,12 @@
 
 ```c#
   public class DataContext : DbContext, IDataContext
-    {
-        void IDataContext.SaveChanges()
-        {
-            base.SaveChanges();
-        }
-    ...
+  { 
+      void IDataContext.SaveChanges()
+      {
+          base.SaveChanges();
+      }
+  ...
 ```
 
 
