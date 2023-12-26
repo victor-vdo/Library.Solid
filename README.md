@@ -4,9 +4,10 @@
 <p align="justify">SOLID encourages modularity, cohesion, abstraction, and low dependency among system components, promoting reusable, testable, and easily maintainable code.</p>
 
 ### S: Single Responsibility Principle (SRP)
+- <p align="justify"> The Model class follow SRP as its primary responsibility is to generate an Id for the classes that inherit from it. It doesn't assume multiple responsibilities beyond that. </p>
 
 ### O: Open/Closed Principle (OCP)
-<p align="justify"> Classes that inherit from Model can override the GenerateId method to implement custom Id generation strategies, keeping the Model class open for extension, without the need to directly modify the base class. Therefore, this model respects the Open/Closed Principle (OCP). </p>
+- <p align="justify"> Classes that inherit from Model can override the GenerateId method to implement custom Id generation strategies, keeping the Model class open for extension, without the need to directly modify the base class. Therefore, this model respects the Open/Closed Principle (OCP): </p>
 
 ```c#
     public abstract class Model
