@@ -1,12 +1,13 @@
-﻿using LibrarySolid.Interfaces.Repositories;
+﻿using LibrarySolid.Interfaces;
+using LibrarySolid.Interfaces.Repositories;
 using LibrarySolid.Models;
 
 namespace LibrarySolid.DataAccess.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DataContext _context;
-        public UserRepository(DataContext context)
+        private readonly IDataContext _context;
+        public UserRepository(IDataContext context)
         {
             _context = context;
         }
@@ -15,6 +16,12 @@ namespace LibrarySolid.DataAccess.Repositories
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
             return user;
+        }
+
+        public List<User> GetAll()
+        {
+            var users = _context.Users.ToList();
+            return users;
         }
 
         public void Add(User user)

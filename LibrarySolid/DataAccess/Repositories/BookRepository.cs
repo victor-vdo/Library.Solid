@@ -1,12 +1,13 @@
-﻿using LibrarySolid.Interfaces.Repositories;
+﻿using LibrarySolid.Interfaces;
+using LibrarySolid.Interfaces.Repositories;
 using LibrarySolid.Models;
 
 namespace LibrarySolid.DataAccess.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        private readonly DataContext _context;
-        public BookRepository(DataContext context)
+        private readonly IDataContext _context;
+        public BookRepository(IDataContext context)
         {
             _context = context;
         }

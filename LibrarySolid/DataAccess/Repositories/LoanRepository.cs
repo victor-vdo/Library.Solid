@@ -1,4 +1,5 @@
-﻿using LibrarySolid.Interfaces.Repositories;
+﻿using LibrarySolid.Interfaces;
+using LibrarySolid.Interfaces.Repositories;
 using LibrarySolid.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,8 +7,8 @@ namespace LibrarySolid.DataAccess.Repositories
 {
     public class LoanRepository : ILoanRepository
     {
-        private readonly DataContext _context;
-        public LoanRepository(DataContext context)
+        private readonly IDataContext _context;
+        public LoanRepository(IDataContext context)
         {
             _context = context;
         }
