@@ -55,5 +55,10 @@ namespace LibrarySolid.DataAccess.Repositories
             }
         }
 
+        public List<Book> GetAll()
+        {
+            var books = _context.Books.ToList();
+            return books;
+        }
     }
 }

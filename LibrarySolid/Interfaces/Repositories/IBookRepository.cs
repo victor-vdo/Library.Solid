@@ -7,6 +7,7 @@ namespace LibrarySolid.Interfaces.Repositories
         Book GetById(Guid id);
         Book GetByAuthor(string author);
         Book GetByTitle(string title);
+        List<Book> GetAll();
         void Add(Book book);
         void Update(Book book);
         void RemoveById(Guid id);
