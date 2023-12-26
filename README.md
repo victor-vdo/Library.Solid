@@ -37,4 +37,27 @@
 ### I: Interface Segregation Principle (ISP)
 
 ### D: Dependency Inversion Principle (DIP)
-<p align="justify">Subclasses that inherit from Model do not have concrete dependencies on low-level modules that directly violate DIP. The dependency is on the generation of the Id, but this is abstracted by calling the GenerateId() method in the Model base class.</p>
+- <p align="justify">Subclasses that inherit from Model do not have concrete dependencies on low-level modules that directly violate DIP. The dependency is on the generation of the Id, but this is abstracted by calling the GenerateId() method in the Model base class.</p>
+- <p align="justify">Initially, the context class was implemented as a parameter in the repository classes. This approach violates the Dependency Inversion Principle, so an interface was created for the context. This approach allows the repository dependencies to be maintained in the IDataContext interface and for the use of custom methods defined in the interface, preserving flexibility and separation between layers.</p>
+
+```c#
+  //private readonly DataContext _context;
+  private readonly IDataContext _context;
+  public BookRepository(IDataContext context)
+  {
+      _context = context;
+  }
+```
+<p align="justify"> For this, it was necessary to create a new method, SaveChanges, which will be accessed by the repositories. </p>
+
+```c#
+  public class DataContext : DbContext, IDataContext
+  { 
+      void IDataContext.SaveChanges()
+      {
+          base.SaveChanges();
+      }
+  ...
+```
+
+
