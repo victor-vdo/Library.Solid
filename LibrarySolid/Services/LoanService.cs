@@ -16,6 +16,26 @@ namespace LibrarySolid.Services
             _repository = repository;
         }
 
+        public ILibraryResult GetLoanById(Guid id)
+        {
+            var loan = _repository.GetById(id);
+
+            if (loan != null)
+            {
+                libraryResult.Status = (int)HttpStatusCode.OK;
+                libraryResult.Message = "Loan found successfully!";
+                libraryResult.Data = loan;
+                return libraryResult;
+            }
+            else
+            {
+                libraryResult.Status = (int)HttpStatusCode.NoContent;
+                libraryResult.Message = "Loan not found!";
+                libraryResult.Data = loan;
+                return libraryResult;
+            }
+        }
+
         public ILibraryResult GetLoanByBookId(Guid bookId)
         {
             var loan = _repository.GetByBookId(bookId);

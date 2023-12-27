@@ -6,8 +6,8 @@ namespace LibrarySolid.Interfaces.Repositories
     {
         User GetById(Guid id);
         List<User> GetAll();
-        void Add(User user);
-        void Update(User user);
-        void Delete(Guid id);
+        bool Add(User user);
+        bool Update(User user);
+        bool Delete(Guid id);
     }
 }

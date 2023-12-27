@@ -1,6 +1,7 @@
 ﻿using LibrarySolid.Interfaces;
 using LibrarySolid.Interfaces.Repositories;
 using LibrarySolid.Models;
+using System.Data;
 
 namespace LibrarySolid.DataAccess.Repositories
 {
@@ -24,13 +25,19 @@ namespace LibrarySolid.DataAccess.Repositories
             return users;
         }
 
-        public void Add(User user)
+        public bool Add(User user)
         {
+            var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
             _context.Users.Add(user);
-            _context.SaveChanges();
+            var isAdded = _context.SaveChanges();
+            transaction.Commit();
+
+            if (isAdded > 0)
+                return true;
+            return false;
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
 
@@ -38,15 +45,29 @@ namespace LibrarySolid.DataAccess.Repositories
             {
                 // Soft delete
                 user.Active = false;
+
+                var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
                 _context.Users.Update(user);
-                _context.SaveChanges();
+                var isUpdated = _context.SaveChanges();
+                transaction.Commit();
+
+                if (isUpdated > 0)
+                    return true;
+                return false;
             }
+            return false;
         }
 
-        public void Update(User user)
+        public bool Update(User user)
         {
+            var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
             _context.Users.Update(user);
-            _context.SaveChanges();
+            var isDeleted = _context.SaveChanges();
+            transaction.Commit();
+
+            if (isDeleted > 0)
+                return true;
+            return false;
         }
     }
 }
