@@ -1,6 +1,7 @@
 ﻿using LibrarySolid.Interfaces;
 using LibrarySolid.Interfaces.Repositories;
 using LibrarySolid.Models;
+using System.Data;
 
 namespace LibrarySolid.DataAccess.Repositories
 {
@@ -12,10 +13,16 @@ namespace LibrarySolid.DataAccess.Repositories
             _context = context;
         }
 
-        public void Add(Book book)
+        public bool Add(Book book)
         {
+            var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
             _context.Books.Add(book);
-            _context.SaveChanges();
+            int isUpdated = _context.SaveChanges();
+            transaction.Commit();
+
+            if (isUpdated > 0)
+                return true;
+            return false;
         }
 
         public Book GetById(Guid id)
@@ -36,13 +43,20 @@ namespace LibrarySolid.DataAccess.Repositories
             return book;
         }
 
-        public void Update(Book book)
+        public bool Update(Book book)
         {
+            var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
             _context.Books.Update(book);
-            _context.SaveChanges();
+            var isUpdated = _context.SaveChanges();
+            transaction.Commit();
+
+            if(isUpdated > 0) 
+                return true;
+            return false;
+
         }
 
-        public void RemoveById(Guid id)
+        public bool RemoveById(Guid id)
         {
             var book = _context.Books.FirstOrDefault(u => u.Id == id);
 
@@ -50,9 +64,17 @@ namespace LibrarySolid.DataAccess.Repositories
             {
                 // Soft delete
                 book.Active = false;
+
+                var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 _context.Books.Update(book);
-                _context.SaveChanges();
+                var isUpdated = _context.SaveChanges();
+                transaction.Commit();
+
+                if (isUpdated > 0)
+                    return true;
+                return false;
             }
+            return false;
         }
 
         public List<Book> GetAll()

@@ -1,5 +1,7 @@
 ﻿using LibrarySolid.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
 
 namespace LibrarySolid.Interfaces
 {
@@ -8,6 +10,7 @@ namespace LibrarySolid.Interfaces
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Loan> Loans { get; set; }
-        void SaveChanges();
+        int SaveChanges();
+        IDbContextTransaction BeginTransaction(IsolationLevel isolation);
     }
 }

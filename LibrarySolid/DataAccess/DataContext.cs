@@ -1,6 +1,8 @@
 ﻿using LibrarySolid.Interfaces;
 using LibrarySolid.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
 
 namespace LibrarySolid.DataAccess
 {
@@ -14,9 +16,14 @@ namespace LibrarySolid.DataAccess
             optionsBuilder.UseNpgsql(ConnectionString);
         }
 
-        void IDataContext.SaveChanges()
+        int IDataContext.SaveChanges()
         {
-            base.SaveChanges();
+            return base.SaveChanges();
+        }
+
+        IDbContextTransaction BeginTransaction(IsolationLevel isolation)
+        { 
+            return base.Database.BeginTransaction(isolation);
         }
 
         public DbSet<User> Users { get; set; }

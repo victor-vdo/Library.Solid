@@ -12,6 +12,7 @@
         public Guid UserId { get; set; }
         public Guid BookId { get; set; }
         public DateTimeOffset LoanDate { get; set; }
+        public DateTimeOffset ReturnDate { get; set; }
         public bool Active { get; set; }
     }
 }

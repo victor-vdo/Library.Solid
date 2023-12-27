@@ -13,13 +13,26 @@ namespace LibrarySolid.DataAccess.Repositories
             _context = context;
         }
 
-        public void Add(Loan loan)
+        public bool Add(Loan loan)
         {
+            loan.Active = true;
+
+            var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
             _context.Loans.Add(loan);
-            _context.SaveChanges();
+            var isAdded = _context.SaveChanges();
+            transaction.Commit();
+
+            if (isAdded > 0)
+                return true;
+            else
+            {
+                transaction.Rollback();
+                return false;
+            }
+
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             var loan = _context.Loans.FirstOrDefault(u => u.Id == id);
 
@@ -27,9 +40,45 @@ namespace LibrarySolid.DataAccess.Repositories
             {
                 // Soft delete
                 loan.Active = false;
+                var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 _context.Loans.Update(loan);
-                _context.SaveChanges();
+                var isDeleted = _context.SaveChanges();
+                transaction.Commit();
+
+                if (isDeleted > 0)
+                    return true;
+                else
+                {
+                    transaction.Rollback();
+                    return false;
+                }
             }
+            return false;
+        }
+
+        public bool DeleteByBookId(Guid bookId)
+        {
+            var loan = _context.Loans.FirstOrDefault(u => u.BookId == bookId);
+
+            if (loan != null)
+            {
+                // Soft delete
+                loan.Active = false;
+                loan.ReturnDate = DateTimeOffset.Now;
+                var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                _context.Loans.Update(loan);
+                var isDeleted = _context.SaveChanges();
+                transaction.Commit();
+
+                if (isDeleted > 0)
+                    return true;
+                else
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+            return false;
         }
 
         public Loan GetById(Guid id)
@@ -56,10 +105,32 @@ namespace LibrarySolid.DataAccess.Repositories
             return loans.ToList();
         }
         
-        public void Update(Loan loan)
+        public bool Update(Loan loan)
         {
+            var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
             _context.Loans.Update(loan);
-            _context.SaveChanges();
+            var isUpdated = _context.SaveChanges();
+            transaction.Commit();
+
+            if (isUpdated > 0)
+                return true;
+            else
+            {
+                transaction.Rollback();
+                return false;
+            }
+        }
+
+        public Loan GetByBookId(Guid bookId)
+        {
+            var loan = _context.Loans.FirstOrDefault(w => w.BookId == bookId);
+            return loan;
+        }
+
+        public List<Loan> GetByUserId(Guid userId)
+        {
+            var loan = _context.Loans.Where(w => w.UserId == userId).AsNoTracking();
+            return loan.ToList();
         }
     }
 }
