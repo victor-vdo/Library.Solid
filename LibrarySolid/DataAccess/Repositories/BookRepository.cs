@@ -82,5 +82,11 @@ namespace LibrarySolid.DataAccess.Repositories
             var books = _context.Books.ToList();
             return books;
         }
+
+        public List<Book> GetAllActive()
+        {
+            var books = _context.Books.Where(w=>w.Active.Equals(true)).ToList();
+            return books;
+        }
     }
 }

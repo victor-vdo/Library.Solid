@@ -21,10 +21,11 @@ namespace LibrarySolid.DataAccess
             return base.SaveChanges();
         }
 
-        IDbContextTransaction BeginTransaction(IsolationLevel isolation)
+        IDbContextTransaction IDataContext.BeginTransaction(IsolationLevel isolation)
         { 
             return base.Database.BeginTransaction(isolation);
         }
+
 
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }

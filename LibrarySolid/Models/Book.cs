@@ -2,6 +2,7 @@
 {
     public class Book : Model
     {
+        public Book() { }
         public Book(string title, string author, string iSBN, int year, bool active)
         {
             Title = title;

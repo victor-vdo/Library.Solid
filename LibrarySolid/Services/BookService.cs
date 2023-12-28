@@ -97,6 +97,26 @@ namespace LibrarySolid.Services
             }
         }
 
+        public ILibraryResult GetAllActiveBooks()
+        {
+            var books = _repository.GetAllActive();
+
+            if (books != null)
+            {
+                libraryResult.Status = (int)HttpStatusCode.OK;
+                libraryResult.Message = "Books founds successfully!";
+                libraryResult.Data = books;
+                return libraryResult;
+            }
+            else
+            {
+                libraryResult.Status = (int)HttpStatusCode.NoContent;
+                libraryResult.Message = "None book was found!";
+                libraryResult.Data = books;
+                return libraryResult;
+            }
+        }
+
         public ILibraryResult RemoveBook(Guid id)
         {
              var isRemoved = _repository.RemoveById(id);
