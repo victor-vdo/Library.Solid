@@ -43,19 +43,19 @@ LibrarySolid
 └── Program.cs
 ```
 
-DataAccess
+<strong> DataAccess </strong>
 <p align="justify">This directory contains data access implementations, such as repositories (BookRepository, LoanRepository, UserRepository), and the database context (DataContext). Each of these files is responsible for handling specific operations related to data access for their respective entities. For instance, BookRepository is responsible solely for operations related to books in the database, such as creating, reading, updating, or deleting books.</p>
 
-Interfaces
+<strong> Interfaces </strong>
 <p align="justify">This directory contains abstractions (interfaces) for different parts of the system, such as repositories (IBookRepository, ILoanRepository, IUserRepository), and presentations (IBookPresentation, ILoanPresentation, IUserPresentation). Each of these interfaces represents an abstract contract defining a specific set of responsibilities to be implemented by concrete classes.</p>
 
-Models
+<strong> Models </strong>
 <p align="justify">This directory holds domain entities, such as the Book, Loan, and User classes. These classes represent the system's data and should not contain complex business logic. Their responsibility is primarily to store entity-related data.</p>
 
-Services
+<strong> Services </strong>
 <p align="justify">This directory contains classes responsible for domain services. For instance, BookService is responsible for orchestrating operations related to books, utilizing the book repository to access data.</p>
 
-Presentation
+<strong> Presentation </strong>
 <p align="justify">This directory encompasses presentation classes like BookPresentation, which handle user interaction or the exposure of data specific to a certain interface type (e.g., console, web).</p>
 
 When following the SRP:
