@@ -94,7 +94,7 @@ When following the SRP:
             var book = _context.Books.FirstOrDefault(u => u.Id == id);
             return book;
         }
-        ....
+        ...
     }
 ```
 
