@@ -5,8 +5,9 @@ namespace LibrarySolid.Interfaces.Repositories
     public interface IBookRepository
     {
         Book GetById(Guid id);
-        Book GetByAuthor(string author);
+        List<Book> GetByAuthor(string author);
         Book GetByTitle(string title);
+        List<Book> GetByYear(string year);
         List<Book> GetAll();
         List<Book> GetAllActive();
         bool Add(Book book);

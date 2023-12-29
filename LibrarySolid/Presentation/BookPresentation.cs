@@ -1,12 +1,15 @@
 ﻿using LibrarySolid.Interfaces;
+using LibrarySolid.Interfaces.Presentations;
 using LibrarySolid.Interfaces.Services;
 using LibrarySolid.Models;
 using LibrarySolid.Utils;
+using System;
 using System.Net;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace LibrarySolid.Presentation
 {
-    public class BookPresentation
+    public class BookPresentation : IBookPresentation
     {
         private readonly IBookService _service;
         private ILibraryResult _result = new LibraryResult((int)HttpStatusCode.InternalServerError, string.Empty, null);
@@ -17,11 +20,77 @@ namespace LibrarySolid.Presentation
             _service = service;
         }
 
+        #region Public Methods
+
+        public void BookRegister()
+        {
+            var book = new Book();
+            Console.WriteLine("Insert the title: ");
+            var title = Console.ReadLine();
+            Console.WriteLine("Insert the author: ");
+            var author = Console.ReadLine();
+            Console.WriteLine("Insert the year: ");
+            var year = Console.ReadLine();
+
+            book.Title = title;
+            book.Author = author;
+            book.Year = year;
+
+            var result = _service.AddBook(book);
+            ConsoleResult.Result(result);
+        }
+
+        public void ConsultBook()
+        {
+            Console.WriteLine("Select an option below:");
+            Console.WriteLine("1 - Search by ID");
+            Console.WriteLine("2 - Search by title");
+            Console.WriteLine("3 - Search by author");
+            Console.WriteLine("4 - Search by year");
+
+            var option = Console.ReadLine();
+            switch (option)
+            {
+                case "1":
+                    Console.WriteLine("Insert the ID:");
+                    var readId = Console.ReadLine();
+                    Guid.TryParse(readId, out Guid id);
+                    var resultId = _service.GetBookById(id);
+                    ConsoleResult.Result(resultId);
+                    break;
+
+                case "2":
+                    Console.WriteLine("Insert the title:");
+                    var title = Console.ReadLine(); 
+                    var resultTitle = _service.GetBookByTitle(title);
+                    ConsoleResult.Result(resultTitle);
+                    break;
+
+                case "3":
+                    Console.WriteLine("Insert the author:");
+                    var author = Console.ReadLine();
+                    var resultAuthor = _service.GetBooksByAuthor(author);
+                    ConsoleResult.Result(resultAuthor);
+                    break;
+
+                case "4":
+                    Console.WriteLine("Insert the year:");
+                    var year = Console.ReadLine();
+                    var resultYear = _service.GetBooksByYear(year);
+                    ConsoleResult.Result(resultYear);
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid option!");
+                    break;
+            }
+        }
+
         public void ShowBooks()
         {
-            Console.WriteLine("Selecione uma opção abaixo:");
-            Console.WriteLine("1 - Listar os livros ativos");
-            Console.WriteLine("2 - Listar todos os livros cadastrados");
+            Console.WriteLine("Select an option below:");
+            Console.WriteLine("1 - List only active books");
+            Console.WriteLine("2 - List all registred books");
             var option = Console.ReadLine();
 
             switch (option)
@@ -34,7 +103,7 @@ namespace LibrarySolid.Presentation
                 case "2":
                     _result = _service.GetAllBooks();
                     _books = _result.Data as List<Book>;
-                   ShowAllBooks(_books);
+                    ShowAllBooks(_books);
                     break;
                 default:
                     Console.WriteLine("Opção inválida!");
@@ -42,11 +111,34 @@ namespace LibrarySolid.Presentation
             }
         }
 
+        public void RemoveBook()
+        {
+            Console.WriteLine("Insert the book ID:");
+            Guid.TryParse(Console.ReadLine(), out Guid id);
+
+            _result = _service.RemoveBook(id);
+            ConsoleResult.Result(_result);
+        }
+       
+        public void ReturnBook()
+        {
+            Console.WriteLine("Insert the book ID:");
+            Guid.TryParse(Console.ReadLine(), out Guid id);
+
+            _result = _service.RemoveBook(id);
+            ConsoleResult.Result(_result);
+        }
+        #endregion
+
+
+        #region Private Methods
+
         private void ShowBook(Book book)
         {
             Console.WriteLine("ID = " + book.Id);
-            Console.WriteLine("Título = " + book.Title);
-            Console.WriteLine("Autor = " + book.Author);
+            Console.WriteLine("Title = " + book.Title);
+            Console.WriteLine("Author = " + book.Author);
+            Console.WriteLine("Year = " + book.Year);
             Console.WriteLine("ISBN = " + book.ISBN);
         }
 
@@ -58,13 +150,13 @@ namespace LibrarySolid.Presentation
                 {
                     Console.WriteLine();
                     Console.WriteLine("ID = " + book.Id);
-                    Console.WriteLine("Título = " + book.Title);
-                    Console.WriteLine("Autor = " + book.Author);
+                    Console.WriteLine("Title = " + book.Title);
+                    Console.WriteLine("Author = " + book.Author);
                     Console.WriteLine("ISBN = " + book.ISBN);
                 }
             }
             else
-                Console.WriteLine("Não existem livros cadastrados!");
+                Console.WriteLine("There are no books registered!");
         }
 
         private void ShowAllActiveBooks(List<Book> books)
@@ -74,35 +166,13 @@ namespace LibrarySolid.Presentation
             {
                 foreach (var book in books)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("ID = " + book.Id);
-                    Console.WriteLine("Título = " + book.Title);
-                    Console.WriteLine("Autor = " + book.Author);
-                    Console.WriteLine("ISBN = " + book.ISBN);
+                    ShowBook(book);
                 }
             }
             else
-                Console.WriteLine("Não existem livros cadastrados!");
+                Console.WriteLine("There are no books registered!");
         }
 
-        private void ShowBookReturn(Book book, List<Book> books, List<Loan> loans)
-        {
-            Console.WriteLine("Insira o ID do livro:");
-            var idBook = Console.ReadLine() ?? String.Empty;
-
-            var id = Guid.TryParse(idBook, out Guid bookResult) ? bookResult : Guid.Empty;
-            var result = _service.GetBookById(id);
-
-            if (book is null)
-                Console.WriteLine("Livro não encontrado na base!");
-
-            //var isReturned = _service.BookReturn(book, loans);
-
-            //if (isReturned)
-            //    Console.WriteLine("Livro devolvido com sucesso!");
-            //else
-            //    Console.WriteLine("Houve um erro ao tentar devolver o livro!");
-        }
-
+        #endregion
     }
 }

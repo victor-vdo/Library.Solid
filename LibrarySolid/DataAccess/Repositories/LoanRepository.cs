@@ -16,7 +16,7 @@ namespace LibrarySolid.DataAccess.Repositories
         public bool Add(Loan loan)
         {
             loan.Active = true;
-
+            loan.ReturnDate = DateTimeOffset.MinValue;
             var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
             _context.Loans.Add(loan);
             var isAdded = _context.SaveChanges();

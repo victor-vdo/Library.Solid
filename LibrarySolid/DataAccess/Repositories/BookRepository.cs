@@ -31,10 +31,10 @@ namespace LibrarySolid.DataAccess.Repositories
             return book;
         }
 
-        public Book GetByAuthor(string author)
+        public List<Book> GetByAuthor(string author)
         {
-            var book = _context.Books.FirstOrDefault(u => u.Author.ToLower().Equals(author.ToLower()));
-            return book;
+            var books = _context.Books.Where(u => u.Author.ToLower().Equals(author.ToLower()));
+            return books.ToList();
         }
 
         public Book GetByTitle(string title)
@@ -87,6 +87,12 @@ namespace LibrarySolid.DataAccess.Repositories
         {
             var books = _context.Books.Where(w=>w.Active.Equals(true)).ToList();
             return books;
+        }
+
+        public List<Book> GetByYear(string year)
+        {
+            var books = _context.Books.Where(u => u.Year.Equals(year));
+            return books.ToList();
         }
     }
 }

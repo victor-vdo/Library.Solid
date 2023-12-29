@@ -1,12 +1,13 @@
 ﻿using LibrarySolid.Interfaces;
 using LibrarySolid.Interfaces.Repositories;
+using LibrarySolid.Interfaces.Services;
 using LibrarySolid.Models;
 using LibrarySolid.Utils;
 using System.Net;
 
 namespace LibrarySolid.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         public IUserRepository _repository { get; set; }
         private LibraryResult libraryResult { get; set; } = new LibraryResult((int)HttpStatusCode.InternalServerError, string.Empty, null);

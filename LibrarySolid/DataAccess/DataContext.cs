@@ -26,7 +26,6 @@ namespace LibrarySolid.DataAccess
             return base.Database.BeginTransaction(isolation);
         }
 
-
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Loan> Loans { get; set; }

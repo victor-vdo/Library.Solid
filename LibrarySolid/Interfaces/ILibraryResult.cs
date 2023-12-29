@@ -1,6 +1,4 @@
-﻿using LibrarySolid.Utils;
-
-namespace LibrarySolid.Interfaces
+﻿namespace LibrarySolid.Interfaces
 {
     public interface ILibraryResult
     {
