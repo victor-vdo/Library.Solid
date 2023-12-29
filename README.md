@@ -64,6 +64,8 @@ When following the SRP:
 - Classes should be cohesive, meaning all methods and attributes should be related to the class's single responsibility.
 
 ### O: Open/Closed Principle (OCP)
+<p align="justify">The Open/Closed Principle (OCP) states that software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. This principle encourages designing systems in a way that allows new functionalities to be added through extension, without altering existing code. By relying on abstraction, inheritance, and polymorphism, the OCP aims to promote code that can be easily extended with new features or behaviors, reducing the need for changes in the existing codebase.</p>
+
 - <p align="justify"> Classes that inherit from Model can override the GenerateId method to implement custom Id generation strategies, keeping the Model class open for extension, without the need to directly modify the base class. Therefore, this model respects the Open/Closed Principle (OCP): </p>
 
 ```c#
