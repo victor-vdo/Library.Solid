@@ -15,31 +15,44 @@
 LibrarySolid
 └── DataAccess
     └── Repositories
-        └── BookRepository
-        └── LoanRepository
-        └── UserRepository
-    └── DataContext
+        └── BookRepository.cs
+        └── LoanRepository.cs
+        └── UserRepository.cs
+    └── DataContext.cs
 └── Interfaces
     └── Presentations
-        └── IBookPresentation
-        └── ILoanPresentation
-        └── IUserPresentation
+        └── IBookPresentation.cs
+        └── ILoanPresentation.cs
+        └── IUserPresentation.cs
     └── Repositories
-        └── IBookRepository
-        └── ILoanRepository
-        └── IUserRepository
+        └── IBookRepository.cs
+        └── ILoanRepository.cs
+        └── IUserRepository.cs
     └── Services
-        └── IBookService
-        └── ILoanService
-        └── IUserService
+        └── IBookService.cs
+        └── ILoanService.cs
+        └── IUserService.cs
+    └── IConsoleResult.cs
+    └── IDataContext.cs
+    └── ILibraryResult.cs
 └── Models
-    └── Book
-    └── Loan
-    └── Model
-    └── User
+    └── Book.cs
+    └── Loan.cs
+    └── Model.cs
+    └── User.cs
 └── Presentation
+    └── BookPresentation.cs
+    └── ConsoleResult.cs
+    └── LoanPresentation.cs
+    └── Main.cs
+    └── UserPresentation.cs
 └── Services
+    └── BookService.cs
+    └── LoanService.cs
+    └── UserService.cs
 └── Utils
+    └── LibraryResult.cs
+└── Program.cs
 ```
 
 ### O: Open/Closed Principle (OCP)
