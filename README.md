@@ -1,15 +1,58 @@
 # SOLID
+<p align="justify">The SOLID principles encompass a set of five software design principles intended to foster the development of more flexible, extensible, and maintainable systems. The acronym represents each principle: S for Single Responsibility Principle, O for Open/Closed Principle, L for Liskov Substitution Principle, I for Interface Segregation Principle, and D for Dependency Inversion Principle.</p>
 
-<p align="justify">The SOLID principles represent a set of five software design principles aimed at creating more flexible, extensible, and maintainable systems. The acronym stands for each of these principles: S for Single Responsibility Principle, O for Open/Closed Principle, L for Liskov Substitution Principle, I for Interface Segregation Principle, and D for Dependency Inversion Principle.</p>
-<p align="justify">SOLID encourages modularity, cohesion, abstraction, and low dependency among system components, promoting reusable, testable, and easily maintainable code.</p>
+<p align="justify">SOLID emphasizes modularity, cohesion, abstraction, and reduced interdependency among system components. It promotes the creation of reusable, testable, and easily maintainable code.</p>
 
-<p align="justify">This project aims to refactor an old project with the goal of rewriting it using the SOLID principles:</p>
+<p align="justify">This project aims to refactor an older codebase, aiming to rewrite it while adhering to the SOLID principles:</p>
 
 [Library Console Project](https://github.com/victor-vdo/Library) 
  
 
 ### S: Single Responsibility Principle (SRP)
 - <p align="justify"> The Model class follow SRP as its primary responsibility is to generate an Id for the classes that inherit from it. It doesn't assume multiple responsibilities beyond that. </p>
+
+```
+LibrarySolid
+└── DataAccess
+    └── Repositories
+        └── BookRepository.cs
+        └── LoanRepository.cs
+        └── UserRepository.cs
+    └── DataContext.cs
+└── Interfaces
+    └── Presentations
+        └── IBookPresentation.cs
+        └── ILoanPresentation.cs
+        └── IUserPresentation.cs
+    └── Repositories
+        └── IBookRepository.cs
+        └── ILoanRepository.cs
+        └── IUserRepository.cs
+    └── Services
+        └── IBookService.cs
+        └── ILoanService.cs
+        └── IUserService.cs
+    └── IDataContext.cs
+    └── ILibraryResult.cs
+└── Models
+    └── Book.cs
+    └── Loan.cs
+    └── Model.cs
+    └── User.cs
+└── Presentation
+    └── BookPresentation.cs
+    └── ConsoleResult.cs
+    └── LoanPresentation.cs
+    └── Main.cs
+    └── UserPresentation.cs
+└── Services
+    └── BookService.cs
+    └── LoanService.cs
+    └── UserService.cs
+└── Utils
+    └── LibraryResult.cs
+└── Program.cs
+```
 
 ### O: Open/Closed Principle (OCP)
 - <p align="justify"> Classes that inherit from Model can override the GenerateId method to implement custom Id generation strategies, keeping the Model class open for extension, without the need to directly modify the base class. Therefore, this model respects the Open/Closed Principle (OCP): </p>
