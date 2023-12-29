@@ -9,7 +9,28 @@
  
 
 ### S: Single Responsibility Principle (SRP)
+<p align="justify"> The Single Responsibility Principle (SRP) is one of the fundamental principles of SOLID. It emphasizes that a class should have only one reason to change, meaning it should have only one responsibility.</p>
+
 - <p align="justify"> The Model class follow SRP as its primary responsibility is to generate an Id for the classes that inherit from it. It doesn't assume multiple responsibilities beyond that. </p>
+
+```c#
+    public abstract class Model
+    {
+        public Guid Id { get; protected set; }
+
+        protected Model()
+        {
+            GenerateId();
+        }
+
+        protected virtual void GenerateId()
+        {
+            Id = Guid.NewGuid();
+        }
+    }
+```
+
+- <p align="justify"> The project structure reflects the separation of responsibilities into different areas: DataAccess, Interfaces, Models, Presentation, Services, and Utils. Each folder has a specific set of responsibilities, which is aligned with the Single Responsibility Principle (SRP).</p>
 
 ```
 LibrarySolid
