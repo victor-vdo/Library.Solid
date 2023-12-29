@@ -1,6 +1,4 @@
-﻿using LibrarySolid.Models;
-
-namespace LibrarySolid.Interfaces.Presentations
+﻿namespace LibrarySolid.Interfaces.Presentations
 {
     public interface IUserPresentation
     {

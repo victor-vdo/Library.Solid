@@ -3,9 +3,7 @@ using LibrarySolid.Interfaces.Presentations;
 using LibrarySolid.Interfaces.Services;
 using LibrarySolid.Models;
 using LibrarySolid.Utils;
-using System;
 using System.Net;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace LibrarySolid.Presentation
 {
@@ -120,14 +118,6 @@ namespace LibrarySolid.Presentation
             ConsoleResult.Result(_result);
         }
        
-        public void ReturnBook()
-        {
-            Console.WriteLine("Insert the book ID:");
-            Guid.TryParse(Console.ReadLine(), out Guid id);
-
-            _result = _service.RemoveBook(id);
-            ConsoleResult.Result(_result);
-        }
         #endregion
 
 

@@ -4,7 +4,6 @@ using LibrarySolid.Interfaces;
 using LibrarySolid.Interfaces.Presentations;
 using LibrarySolid.Interfaces.Repositories;
 using LibrarySolid.Interfaces.Services;
-using LibrarySolid.Models;
 using LibrarySolid.Presentation;
 using LibrarySolid.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,13 +15,13 @@ var serviceProvider = new ServiceCollection()
            .AddTransient<IBookService, BookService>()
            .AddTransient<IBookRepository, BookRepository>()
 
-           //.AddSingleton<ILoanPresentation, LoanPresentation>()
-           //.AddTransient<ILoanService, LoanService>()
-           //.AddTransient<ILoanRepository, LoanRepository>()
+           .AddSingleton<ILoanPresentation, LoanPresentation>()
+           .AddTransient<ILoanService, LoanService>()
+           .AddTransient<ILoanRepository, LoanRepository>()
 
-           //.AddSingleton<IUserPresentation, UserPresentation>()
-           //.AddTransient<IUserService, UserService>()
-           //.AddTransient<IUserRepository, UserRepository>()
+           .AddSingleton<IUserPresentation, UserPresentation>()
+           .AddTransient<IUserService, UserService>()
+           .AddTransient<IUserRepository, UserRepository>()
 
            .BuildServiceProvider();
 
