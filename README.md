@@ -110,8 +110,11 @@ When following the SRP:
 
 
 ### I: Interface Segregation Principle (ISP)
+<p align="justify">The Interface Segregation Principle (ISP) emphasizes that clients should not be forced to depend on interfaces they do not use entirely. It advocates breaking down larger interfaces into smaller, more specific ones, each catering to a distinct set of functionalities. This principle aims to prevent unnecessary dependencies by providing tailored interfaces, allowing clients to interact with only the methods relevant to their needs. By doing so, it promotes a more cohesive and adaptable design, enabling easier maintenance and reducing the impact of changes in the system.</p>
 
 ### D: Dependency Inversion Principle (DIP)
+<p align="justify">The Dependency Inversion Principle (DIP) advocates that high-level modules/classes should not depend on low-level modules/classes directly. Instead, both should depend on abstractions. This principle promotes the use of interfaces or abstract classes to decouple modules and create flexible systems. By relying on abstractions, it allows for easier modification, extension, and testing, fostering a more adaptable and maintainable codebase while reducing tight coupling between different parts of the system.</p>
+
 - <p align="justify">Subclasses that inherit from Model do not have concrete dependencies on low-level modules that directly violate DIP. The dependency is on the generation of the Id, but this is abstracted by calling the GenerateId() method in the Model base class.</p>
 - <p align="justify">Initially, the context class was implemented as a parameter in the repository classes. This approach violates the Dependency Inversion Principle, so an interface was created for the context. This approach allows the repository dependencies to be maintained in the IDataContext interface and for the use of custom methods defined in the interface, preserving flexibility and separation between layers.</p>
 
