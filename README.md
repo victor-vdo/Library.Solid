@@ -11,6 +11,7 @@
 ### S: Single Responsibility Principle (SRP)
 - <p align="justify"> The Model class follow SRP as its primary responsibility is to generate an Id for the classes that inherit from it. It doesn't assume multiple responsibilities beyond that. </p>
 
+https://github.com/orgs/community/discussions/57207
 
 E-commerce
 └── my-app
