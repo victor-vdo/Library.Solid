@@ -1,9 +1,9 @@
 # SOLID
+<p align="justify">The SOLID principles encompass a set of five software design principles intended to foster the development of more flexible, extensible, and maintainable systems. The acronym represents each principle: S for Single Responsibility Principle, O for Open/Closed Principle, L for Liskov Substitution Principle, I for Interface Segregation Principle, and D for Dependency Inversion Principle.</p>
 
-<p align="justify">The SOLID principles represent a set of five software design principles aimed at creating more flexible, extensible, and maintainable systems. The acronym stands for each of these principles: S for Single Responsibility Principle, O for Open/Closed Principle, L for Liskov Substitution Principle, I for Interface Segregation Principle, and D for Dependency Inversion Principle.</p>
-<p align="justify">SOLID encourages modularity, cohesion, abstraction, and low dependency among system components, promoting reusable, testable, and easily maintainable code.</p>
+<p align="justify">SOLID emphasizes modularity, cohesion, abstraction, and reduced interdependency among system components. It promotes the creation of reusable, testable, and easily maintainable code.</p>
 
-<p align="justify">This project aims to refactor an old project with the goal of rewriting it using the SOLID principles:</p>
+<p align="justify">This project aims to refactor an older codebase, aiming to rewrite it while adhering to the SOLID principles:</p>
 
 [Library Console Project](https://github.com/victor-vdo/Library) 
  
