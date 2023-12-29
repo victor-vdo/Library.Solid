@@ -35,45 +35,16 @@
 ```
 LibrarySolid
 └── DataAccess
-    └── Repositories
-        └── BookRepository.cs
-        └── LoanRepository.cs
-        └── UserRepository.cs
-    └── DataContext.cs
 └── Interfaces
-    └── Presentations
-        └── IBookPresentation.cs
-        └── ILoanPresentation.cs
-        └── IUserPresentation.cs
-    └── Repositories
-        └── IBookRepository.cs
-        └── ILoanRepository.cs
-        └── IUserRepository.cs
-    └── Services
-        └── IBookService.cs
-        └── ILoanService.cs
-        └── IUserService.cs
-    └── IDataContext.cs
-    └── ILibraryResult.cs
 └── Models
-    └── Book.cs
-    └── Loan.cs
-    └── Model.cs
-    └── User.cs
 └── Presentation
-    └── BookPresentation.cs
-    └── ConsoleResult.cs
-    └── LoanPresentation.cs
-    └── Main.cs
-    └── UserPresentation.cs
 └── Services
-    └── BookService.cs
-    └── LoanService.cs
-    └── UserService.cs
 └── Utils
-    └── LibraryResult.cs
 └── Program.cs
 ```
+
+- - DataAccess
+<p align="justify">This directory contains data access implementations, such as repositories (BookRepository, LoanRepository, UserRepository), and the database context (DataContext). Each of these files is responsible for handling specific operations related to data access for their respective entities. For instance, BookRepository is responsible solely for operations related to books in the database, such as creating, reading, updating, or deleting books.</p>
 
 ### O: Open/Closed Principle (OCP)
 - <p align="justify"> Classes that inherit from Model can override the GenerateId method to implement custom Id generation strategies, keeping the Model class open for extension, without the need to directly modify the base class. Therefore, this model respects the Open/Closed Principle (OCP): </p>
