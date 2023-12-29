@@ -73,13 +73,13 @@ When following the SRP:
         }
 ```
 
-<p align="justify"> A repository class, for example, can be extended for new functionalities without modifying its existing source code. This can be achieved by adding new methods to the repository interface and implementing these methods in a new class, thereby keeping the current class closed for modifications.</p>
+- <p align="justify"> A repository class, for example, can be extended for new functionalities without modifying its existing source code. This can be achieved by adding new methods to the repository interface and implementing these methods in a new class, thereby keeping the current class closed for modifications.</p>
 
-<p align="justify">When discussing extensibility without modifying existing code, it typically means that changes are made in a way that doesn’t alter the functioning of existing methods or affect existing classes that depend on that interface.</p>
+- <p align="justify">When discussing extensibility without modifying existing code, it typically means that changes are made in a way that doesn’t alter the functioning of existing methods or affect existing classes that depend on that interface.</p>
 
-<p align="justify">In the context of extensibility, the idea would be that if new methods were added to the interface, other classes relying on that interface wouldn’t immediately need changes to keep functioning as before. They would still be able to use the existing methods without modifications but would have the option to implement the new interface methods as needed.</p>
+- <p align="justify">In the context of extensibility, the idea would be that if new methods were added to the interface, other classes relying on that interface wouldn’t immediately need changes to keep functioning as before. They would still be able to use the existing methods without modifications but would have the option to implement the new interface methods as needed.</p>
 
-<p align="justify">So, while adding methods to an interface does require changes in the classes implementing it, the idea of extensibility is more about ensuring that changes don’t negatively impact existing code, allowing for the introduction of new behaviors or functionalities without breaking the already implemented code</p>
+- <p align="justify">So, while adding methods to an interface does require changes in the classes implementing it, the idea of extensibility is more about ensuring that changes don’t negatively impact existing code, allowing for the introduction of new behaviors or functionalities without breaking the already implemented code</p>
 
 
 ### L: Liskov Substitution Principle (LSP)
