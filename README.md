@@ -32,7 +32,6 @@ LibrarySolid
         └── IBookService.cs
         └── ILoanService.cs
         └── IUserService.cs
-    └── IConsoleResult.cs
     └── IDataContext.cs
     └── ILibraryResult.cs
 └── Models
