@@ -25,7 +25,7 @@ var serviceProvider = new ServiceCollection()
 
            .BuildServiceProvider();
 
-// Resolvendo a dependência
+// Resolving the dependency
 var bookPresentation = serviceProvider.GetService<IBookPresentation>();
 var loanPresentation = serviceProvider.GetService<ILoanPresentation>();
 var userPresentation = serviceProvider.GetService<IUserPresentation>();
