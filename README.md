@@ -12,13 +12,34 @@
 - <p align="justify"> The Model class follow SRP as its primary responsibility is to generate an Id for the classes that inherit from it. It doesn't assume multiple responsibilities beyond that. </p>
 
 ```
-E-commerce
-└── my-app
-    └── components 
-    └── data
-    └── pages
-    └── public
-    └── ...more
+LibrarySolid
+└── DataAccess
+    └── Repositories
+        └── BookRepository
+        └── LoanRepository
+        └── UserRepository
+    └── DataContext
+└── Interfaces
+    └── Presentations
+        └── IBookPresentation
+        └── ILoanPresentation
+        └── IUserPresentation
+    └── Repositories
+        └── IBookRepository
+        └── ILoanRepository
+        └── IUserRepository
+    └── Services
+        └── IBookService
+        └── ILoanService
+        └── IUserService
+└── Models
+    └── Book
+    └── Loan
+    └── Model
+    └── User
+└── Presentation
+└── Services
+└── Utils
 ```
 
 ### O: Open/Closed Principle (OCP)
