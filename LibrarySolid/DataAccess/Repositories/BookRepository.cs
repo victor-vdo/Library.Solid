@@ -15,14 +15,16 @@ namespace LibrarySolid.DataAccess.Repositories
 
         public bool Add(Book book)
         {
-            var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
-            _context.Books.Add(book);
-            int isUpdated = _context.SaveChanges();
-            transaction.Commit();
+            using (var transaction = _context.BeginTransaction(IsolationLevel.Serializable))
+            {
+                _context.Books.Add(book);
+                int isUpdated = _context.SaveChanges();
+                transaction.Commit();
 
-            if (isUpdated > 0)
-                return true;
-            return false;
+                if (isUpdated > 0)
+                    return true;
+                return false;
+            }
         }
 
         public Book GetById(Guid id)
@@ -45,15 +47,16 @@ namespace LibrarySolid.DataAccess.Repositories
 
         public bool Update(Book book)
         {
-            var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
-            _context.Books.Update(book);
-            var isUpdated = _context.SaveChanges();
-            transaction.Commit();
+            using(var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable))
+            {
+                _context.Books.Update(book);
+                var isUpdated = _context.SaveChanges();
+                transaction.Commit();
 
-            if(isUpdated > 0) 
-                return true;
-            return false;
-
+                if (isUpdated > 0)
+                    return true;
+                return false;
+            }
         }
 
         public bool RemoveById(Guid id)
@@ -65,14 +68,16 @@ namespace LibrarySolid.DataAccess.Repositories
                 // Soft delete
                 book.Active = false;
 
-                var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                _context.Books.Update(book);
-                var isUpdated = _context.SaveChanges();
-                transaction.Commit();
+                using (var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                {
+                    _context.Books.Update(book);
+                    var isUpdated = _context.SaveChanges();
+                    transaction.Commit();
 
-                if (isUpdated > 0)
-                    return true;
-                return false;
+                    if (isUpdated > 0)
+                        return true;
+                    return false;
+                }
             }
             return false;
         }

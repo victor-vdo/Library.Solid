@@ -17,67 +17,73 @@ namespace LibrarySolid.Presentation
         public void Start()
         {
             Console.WriteLine("Welcome to the library management system!");
+           
             while (true)
             {
-                MainMenu();
-                var option = Console.ReadLine();
-                Console.Clear();
-                switch (option)
+                try
                 {
-                    case "1":
-                        _bookPresentation.BookRegister();
-                        break;
+                    MainMenu();
+                    var option = Console.ReadLine();
+                    Console.Clear();
 
-                    case "2":
-                        _bookPresentation.ConsultBook();
-                        break;
+                    switch (option)
+                    {
+                        case "1":
+                            _bookPresentation.BookRegister();
+                            break;
 
-                    case "3":
-                        _bookPresentation.ShowBooks();
-                        break;
+                        case "2":
+                            _bookPresentation.ConsultBook();
+                            break;
 
-                    case "4":
-                        _bookPresentation.RemoveBook();
-                        break;
+                        case "3":
+                            _bookPresentation.ShowBooks();
+                            break;
 
-                    case "5":
-                        _userPresentation.UserRegister();
-                        break;
+                        case "4":
+                            _bookPresentation.RemoveBook();
+                            break;
 
-                    case "6":
-                        _loanPresentation.LoanRegister();
-                        break;
+                        case "5":
+                            _userPresentation.UserRegister();
+                            break;
 
-                    case "7":
-                        _loanPresentation.LoanReturn();
-                        break;
+                        case "6":
+                            _loanPresentation.LoanRegister();
+                            break;
 
-                    case "8":
-                        return;
-                        break;
+                        case "7":
+                            _loanPresentation.LoanReturn();
+                            break;
 
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Invalid option, try again!");
-                        break;
+                        case "8":
+                            return;
+
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Invalid option, try again!");
+                            break;
+                    }
                 }
-
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
         private void MainMenu()
         {
-                Console.WriteLine("-----------------------------------------------------");
-                Console.WriteLine("Select an option below:");
-                Console.WriteLine("1 - Register a book");
-                Console.WriteLine("2 - Consult a book");
-                Console.WriteLine("3 - Consult all books");
-                Console.WriteLine("4 - Removing a book");
-                Console.WriteLine("5 - Register a user");
-                Console.WriteLine("6 - Register a loan");
-                Console.WriteLine("7 - Return a book");
-                Console.WriteLine("8 - Leave");
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("Select an option below:");
+            Console.WriteLine("1 - Register a book");
+            Console.WriteLine("2 - Consult a book");
+            Console.WriteLine("3 - Consult all books");
+            Console.WriteLine("4 - Removing a book");
+            Console.WriteLine("5 - Register a user");
+            Console.WriteLine("6 - Register a loan");
+            Console.WriteLine("7 - Return a book");
+            Console.WriteLine("8 - Leave");
         }
-
     }
 }

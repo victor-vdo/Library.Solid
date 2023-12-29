@@ -27,14 +27,16 @@ namespace LibrarySolid.DataAccess.Repositories
 
         public bool Add(User user)
         {
-            var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
-            _context.Users.Add(user);
-            var isAdded = _context.SaveChanges();
-            transaction.Commit();
+            using(var transaction = _context.BeginTransaction(IsolationLevel.Serializable))
+            {
+                _context.Users.Add(user);
+                var isAdded = _context.SaveChanges();
+                transaction.Commit();
 
-            if (isAdded > 0)
-                return true;
-            return false;
+                if (isAdded > 0)
+                    return true;
+                return false;
+            }
         }
 
         public bool Delete(Guid id)
@@ -43,31 +45,34 @@ namespace LibrarySolid.DataAccess.Repositories
 
             if(user != null)
             {
-                // Soft delete
-                user.Active = false;
+                using (var transaction = _context.BeginTransaction(IsolationLevel.Serializable))
+                {
+                    // Soft delete
+                    user.Active = false;
+                    _context.Users.Update(user);
+                    var isUpdated = _context.SaveChanges();
+                    transaction.Commit();
 
-                var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
-                _context.Users.Update(user);
-                var isUpdated = _context.SaveChanges();
-                transaction.Commit();
-
-                if (isUpdated > 0)
-                    return true;
-                return false;
+                    if (isUpdated > 0)
+                        return true;
+                    return false;
+                }
             }
             return false;
         }
 
         public bool Update(User user)
         {
-            var transaction = _context.BeginTransaction(IsolationLevel.Serializable);
-            _context.Users.Update(user);
-            var isDeleted = _context.SaveChanges();
-            transaction.Commit();
+            using (var transaction = _context.BeginTransaction(IsolationLevel.Serializable))
+            {
+                _context.Users.Update(user);
+                var isDeleted = _context.SaveChanges();
+                transaction.Commit();
 
-            if (isDeleted > 0)
-                return true;
-            return false;
+                if (isDeleted > 0)
+                    return true;
+                return false;
+            }
         }
     }
 }

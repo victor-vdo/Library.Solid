@@ -17,19 +17,22 @@ namespace LibrarySolid.DataAccess.Repositories
         {
             loan.Active = true;
             loan.ReturnDate = DateTimeOffset.MinValue;
-            var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
-            _context.Loans.Add(loan);
-            var isAdded = _context.SaveChanges();
-            transaction.Commit();
 
-            if (isAdded > 0)
-                return true;
-            else
+            using (var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                transaction.Rollback();
-                return false;
-            }
+                //var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                _context.Loans.Add(loan);
+                var isAdded = _context.SaveChanges();
+                transaction.Commit();
 
+                if (isAdded > 0)
+                    return true;
+                else
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
         }
 
         public bool Delete(Guid id)
@@ -38,19 +41,21 @@ namespace LibrarySolid.DataAccess.Repositories
 
             if (loan != null)
             {
-                // Soft delete
-                loan.Active = false;
-                var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                _context.Loans.Update(loan);
-                var isDeleted = _context.SaveChanges();
-                transaction.Commit();
-
-                if (isDeleted > 0)
-                    return true;
-                else
+                using(var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {
-                    transaction.Rollback();
-                    return false;
+                    // Soft delete
+                    loan.Active = false;
+                    _context.Loans.Update(loan);
+                    var isDeleted = _context.SaveChanges();
+                    transaction.Commit();
+
+                    if (isDeleted > 0)
+                        return true;
+                    else
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
                 }
             }
             return false;
@@ -62,20 +67,22 @@ namespace LibrarySolid.DataAccess.Repositories
 
             if (loan != null)
             {
-                // Soft delete
-                loan.Active = false;
-                loan.ReturnDate = DateTimeOffset.Now;
-                var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                _context.Loans.Update(loan);
-                var isDeleted = _context.SaveChanges();
-                transaction.Commit();
-
-                if (isDeleted > 0)
-                    return true;
-                else
+                using(var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {
-                    transaction.Rollback();
-                    return false;
+                    // Soft delete
+                    loan.Active = false;
+                    loan.ReturnDate = DateTimeOffset.Now;
+                    _context.Loans.Update(loan);
+                    var isDeleted = _context.SaveChanges();
+                    transaction.Commit();
+
+                    if (isDeleted > 0)
+                        return true;
+                    else
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
                 }
             }
             return false;
@@ -107,17 +114,19 @@ namespace LibrarySolid.DataAccess.Repositories
         
         public bool Update(Loan loan)
         {
-            var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
-            _context.Loans.Update(loan);
-            var isUpdated = _context.SaveChanges();
-            transaction.Commit();
-
-            if (isUpdated > 0)
-                return true;
-            else
+            using (var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                transaction.Rollback();
-                return false;
+                _context.Loans.Update(loan);
+                var isUpdated = _context.SaveChanges();
+                transaction.Commit();
+
+                if (isUpdated > 0)
+                    return true;
+                else
+                {
+                    transaction.Rollback();
+                    return false;
+                }
             }
         }
 
