@@ -136,7 +136,7 @@ public interface IBookCommandRepository
     bool RemoveById(Guid id);
 }
 ```
-
+For the scope of this project, it wasn't necessary to perform this division, but it's a potential separation to be done in other contexts and/or architectures. 
 ### D: Dependency Inversion Principle (DIP)
 <p align="justify">The Dependency Inversion Principle (DIP) advocates that high-level modules/classes should not depend on low-level modules/classes directly. Instead, both should depend on abstractions. This principle promotes the use of interfaces or abstract classes to decouple modules and create flexible systems. By relying on abstractions, it allows for easier modification, extension, and testing, fostering a more adaptable and maintainable codebase while reducing tight coupling between different parts of the system.</p>
 
