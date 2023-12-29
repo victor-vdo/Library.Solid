@@ -76,7 +76,27 @@ When following the SRP:
 
 ### L: Liskov Substitution Principle (LSP)
 <p align="justify">The Liskov Substitution Principle (LSP) states that objects of a derived class should be usable wherever objects of its base class are expected, without altering the expected behavior of the program. This means that derived classes should be substitutable for base classes without causing unintended side effects or violating preconditions, post-conditions, and invariants established by the base classes, thus maintaining system consistency.</p>
+
 - <p align="justify">In this project, all data access, service, and presentation classes inherit from an interface. They implement the methods defined in the interface and maintain the expected semantics of these methods, ensuring that objects of types like BookRepository, for instance, can be used instead of the IBookRepository interface without altering the system's behavior.</p>
+
+```c#
+    public interface IBookRepository
+    {
+        Book GetById(Guid id);
+        ...
+    }
+
+    public class BookRepository : IBookRepository
+    {
+        ...
+        public Book GetById(Guid id)
+        {
+            var book = _context.Books.FirstOrDefault(u => u.Id == id);
+            return book;
+        }
+        ....
+    }
+```
 
 
 
