@@ -11,8 +11,7 @@
 ### S: Single Responsibility Principle (SRP)
 - <p align="justify"> The Model class follow SRP as its primary responsibility is to generate an Id for the classes that inherit from it. It doesn't assume multiple responsibilities beyond that. </p>
 
-https://github.com/orgs/community/discussions/57207
-
+```
 E-commerce
 └── my-app
     └── components 
@@ -20,6 +19,7 @@ E-commerce
     └── pages
     └── public
     └── ...more
+```
 
 ### O: Open/Closed Principle (OCP)
 - <p align="justify"> Classes that inherit from Model can override the GenerateId method to implement custom Id generation strategies, keeping the Model class open for extension, without the need to directly modify the base class. Therefore, this model respects the Open/Closed Principle (OCP): </p>
