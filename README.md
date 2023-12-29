@@ -111,7 +111,31 @@ When following the SRP:
 
 ### I: Interface Segregation Principle (ISP)
 <p align="justify">The Interface Segregation Principle (ISP) emphasizes that clients should not be forced to depend on interfaces they do not use entirely. It advocates breaking down larger interfaces into smaller, more specific ones, each catering to a distinct set of functionalities. This principle aims to prevent unnecessary dependencies by providing tailored interfaces, allowing clients to interact with only the methods relevant to their needs. By doing so, it promotes a more cohesive and adaptable design, enabling easier maintenance and reducing the impact of changes in the system.</p>
+
 - <p align="justify">By dividing responsibilities into separate interfaces such as IBookRepository and ILoanRepository, each interface encapsulates a specific set of methods related to handling particular functionalities within the system. This segregation enables clients to selectively depend on interfaces that cater to their specific requirements. As a result, clients are not compelled to implement or rely on functionalities they do not need. This practice aligns with the Interface Segregation Principle (ISP), promoting a more focused, cohesive, and adaptable design. It facilitates the creation of interfaces tailored to distinct responsibilities, allowing for easier maintenance, extension, and usage across various parts of the system without unnecessary dependencies or implementations.</p>
+
+- <p align="justify">In the project context, all methods within the interfaces are utilized within the same flow of each repository. 
+ However, if at any point in the system, a client requires only a specific subset of these methods, they would be compelled to depend on the complete interface, including methods that are irrelevant to their needs. 
+ In this scenario, it might be advantageous to divide this interface into smaller, more specific interfaces, each with a more cohesive purpose related to a specific set of operations. For example:</p>
+
+```c#
+public interface IBookQueryRepository
+{
+    Book GetById(Guid id);
+    List<Book> GetByAuthor(string author);
+    Book GetByTitle(string title);
+    List<Book> GetByYear(string year);
+    List<Book> GetAll();
+    List<Book> GetAllActive();
+}
+
+public interface IBookCommandRepository
+{
+    bool Add(Book book);
+    bool Update(Book book);
+    bool RemoveById(Guid id);
+}
+```
 
 ### D: Dependency Inversion Principle (DIP)
 <p align="justify">The Dependency Inversion Principle (DIP) advocates that high-level modules/classes should not depend on low-level modules/classes directly. Instead, both should depend on abstractions. This principle promotes the use of interfaces or abstract classes to decouple modules and create flexible systems. By relying on abstractions, it allows for easier modification, extension, and testing, fostering a more adaptable and maintainable codebase while reducing tight coupling between different parts of the system.</p>
