@@ -20,7 +20,6 @@ namespace LibrarySolid.DataAccess.Repositories
 
             using (var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                //var transaction = _context.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 _context.Loans.Add(loan);
                 var isAdded = _context.SaveChanges();
                 transaction.Commit();
